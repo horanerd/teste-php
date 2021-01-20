@@ -22,3 +22,6 @@ Tabelas
   - idUser: id do usuário
   - idHobby: id do hobby
 
+Boa Sorte 😄
+
+* Dados dos usuários são totalmente fictícios.
