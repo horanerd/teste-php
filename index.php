@@ -1,10 +1,20 @@
 <?php
 
+// Configuração com banco de dados
 define("HOST", "localhost");
 define("DBSA", "testephp");
 define("USER", "root");
 define("PASS", "");
 
+
+/*****
+ * 
+ * Funções
+ * 
+ */
+
+
+// Conexão com banco de dados
 function Conectar(): object
 {
     try {
@@ -20,7 +30,7 @@ function Conectar(): object
     return $conexao;
 }
 
-
+// Função para calcular a idade
 function calcularIdade($data)
 {
     $idade = 0;
@@ -37,15 +47,21 @@ function calcularIdade($data)
     return $idade;
 }
 
+// Função de retorno de datas
 function date_fmt(?string $date, string $format = "d/m/Y"): string
 {
     $date = (empty($date) ? "now" : $date);
     return (new DateTime($date))->format($format);
 }
 
+/***
+ * 
+ * Recuperar dados baseado json
+ * 
+ */
+
 $pdo = Conectar();
 $users = $pdo->prepare("SELECT * FROM users");
-$hobby = $pdo->prepare("SELECT * FROM hobbies");
 $hobbyvsuser = $pdo->prepare("SELECT u.name, h.hobbie FROM hobbies_x_users hs JOIN users as u ON u.id = hs.idUser JOIN hobbies as h ON h.id = hs.idHobby");
 
 $pais = "Brasil";
