@@ -1,58 +1,5 @@
 <?php
-
-// Configuração com banco de dados
-define("HOST", "localhost");
-define("DBSA", "testephp");
-define("USER", "root");
-define("PASS", "");
-
-
-/*****
- * 
- * Funções
- * 
- */
-
-
-// Conexão com banco de dados
-function Conectar(): object
-{
-    try {
-
-
-        $conexao = new PDO("mysql:host=" . HOST . "; dbname=" . DBSA . "", USER, PASS);
-        $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $conexao->exec("set names utf8");
-    } catch (PDOException $erro) {
-        echo "Erro na conexão:" . $erro->getMessage();
-    }
-
-    return $conexao;
-}
-
-// Função para calcular a idade
-function calcularIdade($data)
-{
-    $idade = 0;
-    $data_nascimento = date('Y-m-d', strtotime($data));
-    list($anoNasc, $mesNasc, $diaNasc) = explode('-', $data_nascimento);
-
-    $idade      = date("Y") - $anoNasc;
-    if (date("m") < $mesNasc) {
-        $idade -= 1;
-    } elseif ((date("m") == $mesNasc) && (date("d") <= $diaNasc)) {
-        $idade -= 1;
-    }
-
-    return $idade;
-}
-
-// Função de retorno de datas
-function date_fmt(?string $date, string $format = "d/m/Y"): string
-{
-    $date = (empty($date) ? "now" : $date);
-    return (new DateTime($date))->format($format);
-}
+require_once("source/config.php");
 
 /***
  * 
